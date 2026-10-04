@@ -1,18 +1,11 @@
 """Runnable polling loop joining mock weather, risk sync, and geo helpers."""
 import argparse
-import sys
 import time
-from pathlib import Path
 
-# Permit both `python -m app.scheduler` and `python app/scheduler.py` from the project root.
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-if str(PROJECT_ROOT) not in sys.path:
-    sys.path.insert(0, str(PROJECT_ROOT))
-
-from app.config import WEATHER_POLL_INTERVAL_MINUTES
-from app.geo_utils import nearest_district
-from app.risk_sync import RiskStore, sync_impacts
-from app.weather_service import DISTRICT_PROFILES, refresh_all_districts
+from config import WEATHER_POLL_INTERVAL_MINUTES
+from geo_utils import nearest_district
+from risk_sync import RiskStore, sync_impacts
+from weather_service import DISTRICT_PROFILES, refresh_all_districts
 
 
 def run_refresh(store: RiskStore | None = None) -> list[dict]:
