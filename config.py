@@ -2,7 +2,7 @@
 from pathlib import Path
 import os
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
+PROJECT_ROOT = Path(__file__).resolve().parent
 
 
 def _load_env_file(path: Path = PROJECT_ROOT / ".env") -> None:
