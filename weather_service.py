@@ -18,8 +18,10 @@ DISTRICT_PROFILES = {
 def mock_forecast(district: str) -> Dict[str, float]:
     """Return stable demo data for a district."""
     profile = DISTRICT_PROFILES[district]
-    return {"rain_mm_24h": float(profile["baseline_rain_mm"]),
-            "wind_kph": float(profile["baseline_wind_kph"])}
+    return {
+        "rain_mm_24h": float(profile["baseline_rain_mm"]),
+        "wind_kph": float(profile["baseline_wind_kph"]),
+    }
 
 
 def _flood_level(rain_mm: float) -> int:
@@ -33,10 +35,15 @@ def _cyclone_level(wind_kph: float) -> int:
 def fetch_district_impact(district: str) -> dict:
     """Score mock flood and cyclone signals into a single impact level (0–3)."""
     forecast = mock_forecast(district)
-    flood, cyclone = _flood_level(forecast["rain_mm_24h"]), _cyclone_level(forecast["wind_kph"])
-    level = max(flood, cyclone)
-    return {"district": district, **forecast, "flood_level": flood,
-            "cyclone_level": cyclone, "impact_level": level}
+    flood = _flood_level(forecast["rain_mm_24h"])
+    cyclone = _cyclone_level(forecast["wind_kph"])
+    return {
+        "district": district,
+        **forecast,
+        "flood_level": flood,
+        "cyclone_level": cyclone,
+        "impact_level": max(flood, cyclone),
+    }
 
 
 def refresh_all_districts() -> list[dict]:

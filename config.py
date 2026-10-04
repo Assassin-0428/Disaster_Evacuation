@@ -21,8 +21,6 @@ def _load_env_file(path: Path = PROJECT_ROOT / ".env") -> None:
 
 _load_env_file()
 
-# Kept for compatibility with a real weather service. The mock doesn't use it.
-OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY", "")
 WEATHER_POLL_INTERVAL_MINUTES = max(
     1, int(os.getenv("WEATHER_POLL_INTERVAL_MINUTES", "60"))
 )
