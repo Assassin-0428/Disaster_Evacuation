@@ -2,7 +2,7 @@
 from pathlib import Path
 import os
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
+PROJECT_ROOT = Path(__file__).resolve().parent
 
 
 def _load_env_file(path: Path = PROJECT_ROOT / ".env") -> None:
@@ -20,6 +20,9 @@ def _load_env_file(path: Path = PROJECT_ROOT / ".env") -> None:
 
 
 _load_env_file()
-# Kept for structural compatibility with a real weather service. The mock never uses it.
+
+# Kept for compatibility with a real weather service. The mock doesn't use it.
 OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY", "")
-WEATHER_POLL_INTERVAL_MINUTES = max(1, int(os.getenv("WEATHER_POLL_INTERVAL_MINUTES", "60")))
+WEATHER_POLL_INTERVAL_MINUTES = max(
+    1, int(os.getenv("WEATHER_POLL_INTERVAL_MINUTES", "60"))
+)
